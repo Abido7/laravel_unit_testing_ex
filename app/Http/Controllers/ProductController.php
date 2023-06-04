@@ -10,9 +10,11 @@ class ProductController extends Controller
 {
     public function index()
     {
-        return response()->json([
-            'products' => Product::get(),
-        ], Response::HTTP_OK);
+        $products = Product::get();
+        return view('product.index', compact('products'));
+//        return response()->json([
+//            'products' => Product::get(),
+//        ], Response::HTTP_OK);
 
     }
 }
