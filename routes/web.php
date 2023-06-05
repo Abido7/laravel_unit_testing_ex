@@ -20,5 +20,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/products', [App\Http\Controllers\ProductController::class, 'index'])->name('product');
+Route::get('/products', [App\Http\Controllers\ProductController::class, 'index'])
+    ->name('product')->middleware('auth');
 

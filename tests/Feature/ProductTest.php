@@ -32,10 +32,28 @@ class ProductTest extends TestCase
      */
     public function test_products_page_has_data()
     {
-//        Product::factory()->create();
+        Product::factory()->create();
         $response = $this->get('/products');
-
         $response->assertStatus(200);
         $response->assertDontSee('no products found');
     }
+
+    /**
+     * A basic feature test product.
+     *
+     * @return void
+     */
+    public function test_products_page_pagination()
+    {
+        $products = Product::factory(11)->create();
+        $last = $products->last();
+        $response = $this->get('/products');
+        $response->assertStatus(200);
+        $response->assertViewHas('products', function ($collection) use ($last) {
+            return $collection->contains($last);
+        });
+    }
+
+
 }
+
