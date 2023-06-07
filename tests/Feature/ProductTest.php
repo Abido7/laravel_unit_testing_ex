@@ -12,7 +12,7 @@ use Tests\TestCase;
 
 class ProductTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
     /**
      * A basic feature test product.
@@ -21,7 +21,6 @@ class ProductTest extends TestCase
      */
     public function test_products_page_empty_table()
     {
-
         $response = $this->actingAs(User::factory()->create())->get('/products');
         $response->assertStatus(200);
         $response->assertSee('no products found');
